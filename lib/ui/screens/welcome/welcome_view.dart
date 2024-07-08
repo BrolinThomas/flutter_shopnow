@@ -23,15 +23,14 @@ class WelcomeView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const SizedBox(
-                height: 200,
+                height: 150,
               ),
               Center(
                   child: Hero(
                 tag: 'logo',
                 child: Image.asset(
-                  'assets/images/logo.png',
-                  height: 180,
-                  width: 200,
+                  'assets/images/logo3.png',
+                  scale: 1.6,
                   fit: BoxFit.fill,
                 ),
               )),
@@ -41,7 +40,7 @@ class WelcomeView extends StatelessWidget {
               Hero(
                 tag: 'container',
                 child: Container(
-                  height: 309,
+                  height: MediaQuery.sizeOf(context).height/2.7,
                   width: MediaQuery.sizeOf(context).width,
                   decoration: const BoxDecoration(
                       boxShadow: [
@@ -60,7 +59,7 @@ class WelcomeView extends StatelessWidget {
                     children: [
                       const SizedBox(height: 20),
                       const Text(
-                        'Hello!',
+                        'Welcome',
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
@@ -73,9 +72,9 @@ class WelcomeView extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             side:
-                                BorderSide(color: Color(0xFF317773), width: 1),
+                                const BorderSide(color: Color(0xFF317773), width: 1),
                             minimumSize: const Size(250, 48),
-                            backgroundColor: Color(0xFF1C3C3A),
+                            backgroundColor: const Color(0xFF1C3C3A),
                           ),
                           onPressed: () {
                             viewModel.goto();
@@ -94,7 +93,7 @@ class WelcomeView extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
                             side:
-                                BorderSide(color: Color(0xFF1C3C3A), width: 1),
+                                const BorderSide(color: Color(0xFF1C3C3A), width: 1),
                             minimumSize: const Size(250, 48),
                           ),
                           onPressed: () {

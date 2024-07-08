@@ -8,11 +8,19 @@ class WelcomeViewModel extends BaseViewModel {
     print("init");
   }
 
+  RouteTransitionsBuilder noAnimationTransition = (_, __, ___, child) => child;
+
   goto() {
-    navigationService.replaceWith(Routes.loginView);
+    navigationService.replaceWith(
+      Routes.loginView,
+      transition: noAnimationTransition,
+    );
   }
 
   gotosignup() {
-    navigationService.replaceWith(Routes.signupView);
+    navigationService.replaceWith(
+      Routes.signupView,
+      transition: noAnimationTransition,
+    );
   }
 }

@@ -1,19 +1,17 @@
-import 'package:shopnow/app/app.router.dart';
-import 'package:shopnow/app/utils.dart';
-import 'package:shopnow/services/wishlist_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
-
+import 'package:shopnow/app/app.router.dart';
+import 'package:shopnow/services/cart_service.dart';
+import 'package:shopnow/services/wishlist_service.dart';
+import '../../../app/utils.dart';
 import '../../../models/product.dart';
-import '../../../services/cart_service.dart';
 import '../catalogue/catalogue_viewmodel.dart';
 import '../popular/popular_viewmodel.dart';
 
 class ProductpageViewmodel extends BaseViewModel {
   final CartService _cartService = GetIt.instance<CartService>();
   final WishlistService _wishlistService = GetIt.instance<WishlistService>();
-
 
   ProductpageViewmodel() {
     _wishlistService.addListener(_onWishlistChanged);
@@ -25,7 +23,7 @@ class ProductpageViewmodel extends BaseViewModel {
     'assets/images/pslider3.png'
   ];
 
-  List<Product> product = [
+  List<Product> products = [
     Product(
       id: 'nikeairmaxap',
       brand: 'Nike',
@@ -34,6 +32,7 @@ class ProductpageViewmodel extends BaseViewModel {
       price: 6000,
       originalPrice: 7000,
     ),
+    // Add more products as needed
   ];
 
   int _currentIndex = 0;
@@ -48,7 +47,7 @@ class ProductpageViewmodel extends BaseViewModel {
   }
 
   void init() {
-    for (var product in product) {
+    for (var product in products) {
       product.isFavorite =
           _wishlistService.wishlist.any((p) => p.id == product.id);
     }
@@ -76,7 +75,7 @@ class ProductpageViewmodel extends BaseViewModel {
   }
 
   void _onWishlistChanged() {
-    for (var product in product) {
+    for (var product in products) {
       product.isFavorite =
           _wishlistService.wishlist.any((p) => p.id == product.id);
     }

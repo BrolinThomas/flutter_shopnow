@@ -38,10 +38,13 @@ class SearchView extends StatelessWidget {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                               borderSide: BorderSide.none),
-                          prefixIcon: const Icon(
-                            Icons.search,
-                            size: 35,
-                            color: Color(0xFF317773),
+                          prefixIcon: const Hero(
+                            tag: 'search',
+                            child: Icon(
+                              Icons.search,
+                              size: 35,
+                              color: Color(0xFF317773),
+                            ),
                           ),
                         ),
                       ),

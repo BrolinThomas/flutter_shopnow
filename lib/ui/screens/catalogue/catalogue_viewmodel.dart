@@ -1,11 +1,9 @@
 import 'package:shopnow/app/app.router.dart';
 import 'package:shopnow/app/utils.dart';
 import 'package:shopnow/ui/screens/productpage/productpage_viewmodel.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:stacked/stacked.dart';
-
 import '../../../app/app.locator.dart';
 import '../../../models/product.dart';
 import '../../../services/wishlist_service.dart';
@@ -13,6 +11,7 @@ import '../popular/popular_viewmodel.dart';
 
 class CatalogueViewmodel extends BaseViewModel {
   final WishlistService _wishlistService = GetIt.instance<WishlistService>();
+  RouteTransitionsBuilder noAnimationTransition = (_, __, ___, child) => child;
 
   final List<String> imageUrls = [
     'assets/images/slidera.png',
@@ -123,7 +122,7 @@ class CatalogueViewmodel extends BaseViewModel {
   }
 
   void navigateToSearch() {
-    navigationService.navigateTo(Routes.searchView);
+    navigationService.navigateTo(Routes.searchView,transition: noAnimationTransition);
   }
 
   void navigateToProduct() {

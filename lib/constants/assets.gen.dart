@@ -153,6 +153,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
+  /// File path: assets/images/logo2.png
+  AssetGenImage get logo2 => const AssetGenImage('assets/images/logo2.png');
+
+  /// File path: assets/images/logo3.png
+  AssetGenImage get logo3 => const AssetGenImage('assets/images/logo3.png');
+
   /// File path: assets/images/nabluejeans.png
   AssetGenImage get nabluejeans =>
       const AssetGenImage('assets/images/nabluejeans.png');
@@ -319,6 +325,8 @@ class $AssetsImagesGen {
         is2,
         is3,
         logo,
+        logo2,
+        logo3,
         nabluejeans,
         nacasioefr,
         nacasualt,

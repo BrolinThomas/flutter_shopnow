@@ -23,12 +23,13 @@ class SignupViewModel extends BaseViewModel {
   void init() {
     print("init");
   }
+  RouteTransitionsBuilder noAnimationTransition = (_, __, ___, child) => child;
 
   gotohome() {
-    navigationService.replaceWith(Routes.homeView);
+    navigationService.replaceWith(Routes.homeView,transition: noAnimationTransition);
   }
 
   goto() {
-    navigationService.replaceWith(Routes.loginView);
+    navigationService.replaceWith(Routes.loginView,transition: noAnimationTransition);
   }
 }

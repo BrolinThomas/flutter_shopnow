@@ -9,7 +9,7 @@ class ProfileViewmodel extends BaseViewModel {
   }
 
   void logout() {
-    navigationService.replaceWith(Routes.welcomeView);
+    navigationService.pushNamedAndRemoveUntil(Routes.welcomeView);
   }
 
   void gonotif() {

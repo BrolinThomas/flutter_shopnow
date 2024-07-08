@@ -1,9 +1,8 @@
-import 'package:shopnow/ui/screens/popular/popular_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:stacked/stacked.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import '../../../models/product.dart';
+import '../category/category_view.dart';
 import 'catalogue_viewmodel.dart';
 
 class CatalogueView extends StatelessWidget {
@@ -18,22 +17,24 @@ class CatalogueView extends StatelessWidget {
       viewModelBuilder: () {
         return CatalogueViewmodel();
       },
-      builder:
-          (BuildContext context, CatalogueViewmodel viewModel, Widget? child) {
+      builder: (BuildContext context, CatalogueViewmodel viewModel, Widget? child) {
         return Scaffold(
           appBar: AppBar(
             elevation: 0,
             backgroundColor: Colors.transparent,
-            title: Image.asset(
-              'assets/images/cartifyicon.png',
-              scale: 1.75,
+            title: Hero(
+              tag: 'logo',
+              child: Image.asset(
+                'assets/images/logo2.png',
+                scale: 5,
+              ),
             ),
             actions: [
               IconButton(
                 onPressed: () {
                   viewModel.navigateToSearch();
                 },
-                icon: const Icon(Icons.search),
+                icon: const Hero(tag: 'search', child: Icon(Icons.search)),
                 iconSize: 35,
                 color: const Color(0xFF317773),
               ),
@@ -44,66 +45,52 @@ class CatalogueView extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 10),
-                CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    aspectRatio: 2.7,
-                    viewportFraction: 1,
-                    onPageChanged: (index, reason) {
+                AspectRatio(
+                  aspectRatio: 2.5,
+                  child: CarouselSlider(
+                    slideTransform: DefaultTransform(),
+                    unlimitedMode: true,
+                    autoSliderTransitionTime: const Duration(seconds: 1),
+                    enableAutoSlider: true,autoSliderDelay: const Duration(seconds: 5),
+                    slideIndicator: CircularSlideIndicator(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      indicatorRadius: 5,
+                      itemSpacing: 15,
+                      currentIndicatorColor: const Color(0xFF317773),
+                      indicatorBackgroundColor: const Color(0xFF317773).withOpacity(0.4),
+                    ),
+                    children: viewModel.imageUrls.map((imageUrl) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  blurRadius: 5,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Image.asset(
+                                imageUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    }).toList(),
+                    onSlideChanged: (index) {
                       viewModel.setCurrentIndex(index);
                     },
                   ),
-                  items: viewModel.imageUrls.map((imageUrl) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 5.0, vertical: 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15.0),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 5,
-                                offset: Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image.asset(
-                              imageUrl,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: viewModel.imageUrls.asMap().entries.map((entry) {
-                    return GestureDetector(
-                      onTap: () => viewModel.setCurrentIndex(entry.key),
-                      child: Container(
-                        width: 10.0,
-                        height: 10.0,
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 4.0),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: viewModel.currentIndex == entry.key
-                              ? Colors.green
-                              : Colors.greenAccent.withOpacity(0.4),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -111,31 +98,32 @@ class CatalogueView extends StatelessWidget {
                     children: [
                       const Text(
                         'Category',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       TextButton(
-                          onPressed: () {
-                            viewModel.navigateToCategory();
-                          },
-                          child: const Text('See All',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Color(0xFF317773))))
+                        onPressed: () {
+                          viewModel.navigateToCategory();
+                        },
+                        child: const Text(
+                          'See All',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color(0xFF317773),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: 190,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: GridView.builder(
                       itemCount: 2,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         childAspectRatio: 1,
                         crossAxisSpacing: 10.0,
@@ -150,7 +138,6 @@ class CatalogueView extends StatelessWidget {
                     ),
                   ),
                 ),
-                //Popular Page--------------------------------------------------
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -158,38 +145,44 @@ class CatalogueView extends StatelessWidget {
                     children: [
                       const Text(
                         'Popular',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       TextButton(
-                          onPressed: () {
-                            viewModel.navigateToPopular();
-                          },
-                          child: const Text('See All',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Color(0xFF317773))))
+                        onPressed: () {
+                          viewModel.navigateToPopular();
+                        },
+                        child: const Text(
+                          'See All',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color(0xFF317773),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  height: 260,
                   width: MediaQuery.sizeOf(context).width,
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: viewModel.popproducts.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, childAspectRatio: 0.8),
-                    itemBuilder: (context, index) {
-                      final product = viewModel.popproducts[index];
-                      return ProductCard(
-                          product: product, viewModel: viewModel);
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: viewModel.popproducts.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemBuilder: (context, index) {
+                        final product = viewModel.popproducts[index];
+                        return ProductCard(product: product, viewModel: viewModel);
+                      },
+                    ),
                   ),
                 ),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Row(
@@ -197,36 +190,42 @@ class CatalogueView extends StatelessWidget {
                     children: [
                       const Text(
                         'New Arrivals',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                       TextButton(
-                          onPressed: () {
-                            viewModel.navigateToNewArrivals();
-                          },
-                          child: const Text('See All',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Color(0xFF317773))))
+                        onPressed: () {
+                          viewModel.navigateToNewArrivals();
+                        },
+                        child: const Text(
+                          'See All',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Color(0xFF317773),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
                 SizedBox(
                   height: 260,
                   width: MediaQuery.sizeOf(context).width,
-                  child: GridView.builder(
-                    itemCount: viewModel.newproducts.length,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2, childAspectRatio: 0.8),
-                    itemBuilder: (context, index) {
-                      final product = viewModel.newproducts[index];
-                      return ProductCard(
-                          product: product, viewModel: viewModel);
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: GridView.builder(
+                      itemCount: viewModel.newproducts.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemBuilder: (context, index) {
+                        final product = viewModel.newproducts[index];
+                        return ProductCard(product: product, viewModel: viewModel);
+                      },
+                    ),
                   ),
                 ),
               ],
@@ -242,7 +241,8 @@ class ProductCard extends StatelessWidget {
   final Product product;
   final CatalogueViewmodel viewModel;
 
-  const ProductCard({super.key, required this.product, required this.viewModel});
+  const ProductCard(
+      {super.key, required this.product, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {

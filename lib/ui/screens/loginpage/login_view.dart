@@ -19,15 +19,14 @@ class LoginView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const SizedBox(height: 40),
+                const SizedBox(height: 50),
                 //Logo----------------------------------------------------------
                 Center(
                   child: Hero(
                     tag: 'logo',
                     child: Image.asset(
-                      'assets/images/logo.png',
-                      height: 127,
-                      width: 137,
+                      'assets/images/logo3.png',
+                      scale: 2,
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -37,7 +36,7 @@ class LoginView extends StatelessWidget {
                 Hero(
                   tag: 'container',
                   child: Container(
-                    height: MediaQuery.of(context).size.height - 187,
+                    height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
                       boxShadow: [
@@ -77,7 +76,7 @@ class LoginView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 50,
                                     //Email Field---------------------------------
                                     child: TextFormField(
@@ -123,7 +122,7 @@ class LoginView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 50,
                                     //Password Field------------------------------
                                     child: TextFormField(

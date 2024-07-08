@@ -17,16 +17,18 @@ class LoginViewModel extends BaseViewModel {
     _rememberMe = value;
     notifyListeners(); // Notify listeners to update the UI
   }
+  RouteTransitionsBuilder noAnimationTransition = (_, __, ___, child) => child;
 
   void init() {
     print("init");
   }
 
   gotohome() {
-    navigationService.replaceWith(Routes.homeView);
+    navigationService.replaceWith(Routes.homeView,transition: noAnimationTransition);
+
   }
 
   gotosignup() {
-    navigationService.replaceWith(Routes.signupView);
+    navigationService.replaceWith(Routes.signupView,transition: noAnimationTransition);
   }
 }
