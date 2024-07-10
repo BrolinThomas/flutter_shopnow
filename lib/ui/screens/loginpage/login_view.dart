@@ -76,90 +76,82 @@ class LoginView extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30.0),
-                                  child: SizedBox(
-                                    height: 50,
-                                    //Email Field---------------------------------
-                                    child: TextFormField(
-                                      controller: viewModel.emailcontroller,
-                                      decoration: InputDecoration(
-                                        prefixIcon: const Icon(Icons.email),
-                                        labelText: 'Email Id',
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFF317773)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFF317773)),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFF317773)),
-                                        ),
+                                  child: TextFormField(
+                                    controller: viewModel.emailcontroller,
+                                    decoration: InputDecoration(
+                                      prefixIcon: const Icon(Icons.email),
+                                      labelText: 'Email Id',
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF317773)),
                                       ),
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your email';
-                                        } else if (value.length < 6) {
-                                          return 'Please enter a valid email';
-                                        } //Regular Expression
-                                        else if (!viewModel.emailValid
-                                            .hasMatch(value)) {
-                                          return 'Please enter a valid email';
-                                        }
-                                        return null;
-                                      },
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF317773)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF317773)),
+                                      ),
                                     ),
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your email';
+                                      } else if (value.length < 6) {
+                                        return 'Please enter a valid email';
+                                      } //Regular Expression
+                                      else if (!viewModel.emailValid
+                                          .hasMatch(value)) {
+                                        return 'Please enter a valid email';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                                 const SizedBox(height: 20),
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 30.0),
-                                  child: SizedBox(
-                                    height: 50,
-                                    //Password Field------------------------------
-                                    child: TextFormField(
-                                      controller: viewModel.passwordcontroller,
-                                      decoration: InputDecoration(
-                                        prefixIcon: const Icon(Icons.key),
-                                        labelText: 'Password',
-                                        border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFF317773)),
-                                        ),
-                                        enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFF317773)),
-                                        ),
-                                        focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          borderSide: const BorderSide(
-                                              color: Color(0xFF317773)),
-                                        ),
+                                  child: TextFormField(
+                                    controller: viewModel.passwordcontroller,
+                                    decoration: InputDecoration(
+                                      prefixIcon: const Icon(Icons.key),
+                                      labelText: 'Password',
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF317773)),
                                       ),
-                                      obscureText: true,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Please enter your password';
-                                        }
-                                        if (value.length < 6) {
-                                          return 'Password must be at least 6 characters';
-                                        }
-                                        return null;
-                                      },
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF317773)),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10),
+                                        borderSide: const BorderSide(
+                                            color: Color(0xFF317773)),
+                                      ),
                                     ),
+                                    obscureText: true,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return 'Please enter your password';
+                                      }
+                                      if (value.length < 6) {
+                                        return 'Password must be at least 6 characters';
+                                      }
+                                      return null;
+                                    },
                                   ),
                                 ),
                               ],
