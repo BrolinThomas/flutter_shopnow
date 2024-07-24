@@ -27,7 +27,7 @@ class SignupView extends StatelessWidget {
                     tag: 'logo',
                     child: Image.asset(
                       'assets/images/logo3.png',
-                      scale: 2,
+                      scale: 2.4,
                       fit: BoxFit.fill,
                     ),
                   ),

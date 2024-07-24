@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:shopnow/constants/fonts.gen.dart';
 import 'package:shopnow/models/product.dart';
 import 'package:flutter/material.dart';
@@ -28,13 +29,14 @@ class WishlistView extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        SizedBox(height: 70,),
+                        const SizedBox(
+                          height: 70,
+                        ),
                         Opacity(
-                            opacity: 0.4,
-                            child: Image.asset(
-                              'assets/images/catpresent.png',
-                              scale: 4,
-                            )),
+                          opacity: 0.7,
+                          child: Lottie.asset('assets/images/personempty.json',
+                              repeat: true, width: 300, fit: BoxFit.fill),
+                        ),
                         const Text(
                           'Your Wishlist is empty!',
                           style: TextStyle(
@@ -71,7 +73,7 @@ class WishlistView extends StatelessWidget {
                                   )),
                               title: Text(
                                 product.name,
-                                style: TextStyle(fontSize: 14),
+                                style: const TextStyle(fontSize: 14),
                               ),
                               subtitle: Text(
                                 '₹${product.price}',

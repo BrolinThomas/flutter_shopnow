@@ -2,6 +2,7 @@ import 'package:shopnow/constants/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'welcome_viewmodel.dart';
+import 'package:lottie/lottie.dart';
 
 class WelcomeView extends StatelessWidget {
   const WelcomeView({super.key});
@@ -28,10 +29,16 @@ class WelcomeView extends StatelessWidget {
               Center(
                   child: Hero(
                 tag: 'logo',
-                child: Image.asset(
-                  'assets/images/logo3.png',
-                  scale: 1.6,
-                  fit: BoxFit.fill,
+                child: Column(
+                  children: [
+                    Lottie.asset('assets/images/logo.json',repeat: false,width: 250,fit: BoxFit.fill),
+                    const SizedBox(height: 20,),
+                    Image.asset(
+                      'assets/images/logo3.png',
+                      scale: 2,
+                      fit: BoxFit.fill,
+                    ),
+                  ],
                 ),
               )),
               // const SizedBox(

@@ -1,3 +1,4 @@
+import 'package:lottie/lottie.dart';
 import 'package:shopnow/constants/fonts.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
@@ -19,7 +20,7 @@ class MycartView extends StatelessWidget {
           (BuildContext context, MycartViewmodel viewModel, Widget? child) {
         return Scaffold(
           appBar: AppBar(
-              title: Text('My Cart'),
+              title: const Text('My Cart'),
               iconTheme: const IconThemeData(color: Color(0xFF317773))),
           body: viewModel.cartItems.isEmpty
               ? Column(
@@ -27,15 +28,13 @@ class MycartView extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 70,
                         ),
                         Opacity(
-                          opacity: 0.4,
-                          child: Image.asset(
-                            'assets/images/catpresent.png',
-                            scale: 4,
-                          ),
+                          opacity: 0.7,
+                          child: Lottie.asset('assets/images/personempty.json',
+                              repeat: true, width: 300, fit: BoxFit.fill),
                         ),
                         const Text(
                           'Your Cart is empty!',
